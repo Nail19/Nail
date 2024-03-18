@@ -62,12 +62,8 @@ public class Nail {
             }
             // Проверяем наличие лишних пробелов и выводим результат вычитания
             String result = word1.replaceAll(word2, "");
-            if(result.contains(" ")){
-                result = result.replace(" ","\"");
-                System.out.println("\""+result);
-            }else{
-                System.out.println("\""+result+"\"");
-            }
+            result = result.replace(" ","");
+            System.out.println("\""+result+"\"");
         }
         // Выполняем умножение строк,если в строке содержится множитель
         if (line.contains("*")) {
