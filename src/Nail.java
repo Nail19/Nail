@@ -60,8 +60,14 @@ public class Nail {
             if (word1.length() > 10 || word2.length() > 10) {
                 throw new IOException("Строка содержит более 10 символов");
             }
-            // Выводим результат вычитания
-            System.out.println(word1.replaceAll(word2, ""));
+            // Проверяем наличие лишних пробелов и выводим результат вычитания
+            String result = word1.replaceAll(word2, "");
+            if(result.contains(" ")){
+                result = result.replace(" ","\"");
+                System.out.println("\""+result);
+            }else{
+                System.out.println("\""+result+"\"");
+            }
         }
         // Выполняем умножение строк,если в строке содержится множитель
         if (line.contains("*")) {
