@@ -9,6 +9,8 @@ public class Nail {
         Scanner scanner = new Scanner(System.in);
         // Считываем строку
         String line = scanner.nextLine();
+        // Проверяем строку на наличие лишних пробелов
+        line = line.replace(" ","");
         // Проверяем входящую строку на пустоту
         if (line.isEmpty()) {
             throw new IOException("Не верное выражение");
