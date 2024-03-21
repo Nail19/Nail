@@ -9,17 +9,30 @@ public class Nail {
         Scanner scanner = new Scanner(System.in);
         // Считываем строку
         String line = scanner.nextLine();
-        // Проверяем строку на наличие лишних пробелов
-        line = line.replace(" ","");
         // Проверяем входящую строку на пустоту
         if (line.isEmpty()) {
-            throw new IOException("Не верное выражение");
+            throw new IOException("Неверное выражение");
         }
-        // Выполняем сложение строк,если в строке содержится плюс
-        if (line.contains("+")) {
-            // Делим строку на две части
-            String[] lines = line.split("\\+");
-            // Проверяем что получилось 2 строки
+        // Создаем массив строки
+        String[] lines;
+        //Определяем знак выражения
+        char expression;
+        if (line.contains(" + ")) {
+            lines = line.split(" \\+ ");
+            expression = '+';
+        } else if (line.contains(" - ")) {
+            lines = line.split(" - ");
+            expression = '-';
+        } else if (line.contains(" * ")) {
+            lines = line.split(" \\* ");
+            expression = '*';
+        } else if (line.contains(" / ")) {
+            lines = line.split(" / ");
+            expression = '/';
+        } else {
+            throw new Exception("Некорректный знак действия или не указан пробел перед и после знака выражение");
+        }
+        if (expression == '+') {
             if (lines.length != 2) {
                 throw new IOException("Не верное выражение");
             }
@@ -30,6 +43,9 @@ public class Nail {
             if (!word1.startsWith("\"") || !word1.endsWith("\"") || !word2.startsWith("\"") || !word2.endsWith("\"")) {
                 throw new IOException("В выражение отсутствуют кавычки");
             }
+            // Проверяем строку на наличие лишних пробелов
+            word1 = word1.replace(" ", "");
+            word2 = word2.replace(" ", "");
             // Удаляем первые и последние символы строк
             word1 = word1.substring(1, word1.length() - 1);
             word2 = word2.substring(1, word2.length() - 1);
@@ -39,11 +55,7 @@ public class Nail {
             }
             // Выводим результат сложения
             System.out.println(STR."\"\{word1 + word2}\"");
-        }
-        //Выполняем вычитание строк,если в строке содержится минус
-        if (line.contains("-")) {
-            // Делим строку на две части
-            String[] lines = line.split("-");
+        } else if (expression == '-') {
             // Проверяем что получилось 2 строки
             if (lines.length != 2) {
                 throw new IOException("Не верное выражение");
@@ -55,6 +67,9 @@ public class Nail {
             if (!word1.startsWith("\"") || !word1.endsWith("\"") || !word2.startsWith("\"") || !word2.endsWith("\"")) {
                 throw new IOException("В выражение отсутствуют кавычки");
             }
+            // Проверяем строку на наличие лишних пробелов
+            word1 = word1.replace(" ", "");
+            word2 = word2.replace(" ", "");
             // Удаляем первые и последние символы строк
             word1 = word1.substring(1, word1.length() - 1);
             word2 = word2.substring(1, word2.length() - 1);
@@ -64,13 +79,9 @@ public class Nail {
             }
             // Проверяем наличие лишних пробелов и выводим результат вычитания
             String result = word1.replaceAll(word2, "");
-            result = result.replace(" ","");
-            System.out.println("\""+result+"\"");
-        }
-        // Выполняем умножение строк,если в строке содержится множитель
-        if (line.contains("*")) {
-            // Делим строку на две части
-            String[] lines = line.split("\\*");
+            result = result.replace(" ", "");
+            System.out.println("\"" + result + "\"");
+        } else if (expression == '*') {
             // Проверяем что получилось 2 строки
             if (lines.length != 2) {
                 throw new IOException("Не верное выражение");
@@ -102,11 +113,7 @@ public class Nail {
             } else {
                 System.out.println(STR."\"\{STR."\{result.substring(0, 40)}..."}\"");
             }
-        }
-        //Выполняем деление строк,если в строке содержится делитель
-        if (line.contains("/")) {
-            // Делим строку на две части
-            String[] lines = line.split("/");
+        } else if (expression == '/') {
             // Проверяем что получилось 2 строки
             if (lines.length != 2) {
                 throw new IOException("Не верное выражение");
